@@ -2,10 +2,24 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp>{
+  var question = [
+    'What \'s your favourite color?',
+    'What \'s your favourite place?'
+  ];
+
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
+    const double padding = 16.0;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -13,17 +27,17 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.green,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(padding),
           child: Column(
             children: <Widget>[
               Center(
-                child: Text('The Question: ...'),
+                child: Text(question[index]),
               ),
               Row(
                 children: <Widget>[
                   RaisedButton(
                     child: Text('Answer 1: '),
-                    onPressed: null,
+                    onPressed: answerQuestion
                   ),
                 ],
               ),
@@ -31,7 +45,7 @@ class MyApp extends StatelessWidget {
                 children: <Widget>[
                   RaisedButton(
                     child: Text('Answer 2: '),
-                    onPressed: null,
+                    onPressed: answerQuestion,
                   ),
                 ],
               ),
@@ -39,7 +53,7 @@ class MyApp extends StatelessWidget {
                 children: <Widget>[
                   RaisedButton(
                     child: Text('Answer 3: '),
-                    onPressed: null,
+                    onPressed: answerQuestion,
                   ),
                 ],
               ),
@@ -47,7 +61,7 @@ class MyApp extends StatelessWidget {
                 children: <Widget>[
                   RaisedButton(
                     child: Text('Answer 4: '),
-                    onPressed: null,
+                    onPressed: answerQuestion,
                   ),
                 ],
               ),
@@ -56,5 +70,19 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  int nextQuestion(){
+    if (index < question.length-1){
+      return index++;
+    }
+    return index = 0;
+  }
+
+  void answerQuestion(){
+    setState(() {
+      question.elementAt(nextQuestion());
+      print(index);
+    });
   }
 }
