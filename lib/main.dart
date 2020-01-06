@@ -1,67 +1,73 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp>{
-  var question = [
+class _MyAppState extends State<MyApp> {
+  List<String> _question = [
     'What \'s your favourite color?',
     'What \'s your favourite place?'
   ];
 
-  int index = 0;
+  List<String> _text = [
+    'Quiz_App',
+    'Answer 1: ',
+    'Answer 2: ',
+    'Answer 3: ',
+    'Answer 4: '
+  ];
+
+  int _index = 0;
 
   @override
   Widget build(BuildContext context) {
-    const double padding = 16.0;
+    const double _padding = 16.0;
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Quiz_App'),
+          title: Text(_text[0]),
           backgroundColor: Colors.green,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(padding),
+          padding: const EdgeInsets.all(_padding),
           child: Column(
             children: <Widget>[
-              Center(
-                child: Text(question[index]),
+              Question(_question[_index]),
+              Row(
+                children: <Widget>[
+                  RaisedButton(
+                      child: Text(_text[1]), onPressed: _answerQuestion),
+                ],
               ),
               Row(
                 children: <Widget>[
                   RaisedButton(
-                    child: Text('Answer 1: '),
-                    onPressed: answerQuestion
+                    child: Text(_text[2]),
+                    onPressed: _answerQuestion,
                   ),
                 ],
               ),
               Row(
                 children: <Widget>[
                   RaisedButton(
-                    child: Text('Answer 2: '),
-                    onPressed: answerQuestion,
+                    child: Text(_text[3]),
+                    onPressed: _answerQuestion,
                   ),
                 ],
               ),
               Row(
                 children: <Widget>[
                   RaisedButton(
-                    child: Text('Answer 3: '),
-                    onPressed: answerQuestion,
-                  ),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  RaisedButton(
-                    child: Text('Answer 4: '),
-                    onPressed: answerQuestion,
+                    child: Text(_text[4]),
+                    onPressed: _answerQuestion,
                   ),
                 ],
               ),
@@ -72,17 +78,17 @@ class MyAppState extends State<MyApp>{
     );
   }
 
-  int nextQuestion(){
-    if (index < question.length-1){
-      return index++;
+  int nextQuestion() {
+    if (_index < _question.length - 1) {
+      return _index++;
     }
-    return index = 0;
+    return _index = 0;
   }
 
-  void answerQuestion(){
+  void _answerQuestion() {
     setState(() {
-      question.elementAt(nextQuestion());
-      print(index);
+      _question.elementAt(nextQuestion());
+      print(_index);
     });
   }
 }
