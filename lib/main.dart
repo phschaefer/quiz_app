@@ -35,6 +35,7 @@ class _MyAppState extends State<MyApp> {
 
   int _index = 0;
   int _totalScore=0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,9 +49,16 @@ class _MyAppState extends State<MyApp> {
                 answerQuestion: _answerQuestion,
                 index: _index,
                 questions: _questions)
-            : Result(),
+            : Result(_totalScore,_resetQuiz),
       ),
     );
+  }
+
+  void _resetQuiz(){
+    setState(() {
+      _index = 0;
+      _totalScore = 0;
+    });
   }
 
   int nextQuestion() {
