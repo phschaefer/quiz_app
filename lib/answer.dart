@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
-
   final String answerText;
   final Function selectHandler;
 
@@ -9,15 +8,18 @@ class Answer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Row(
-      children: <Widget>[
-        RaisedButton(
-          color: Colors.green,
-            child: Text(answerText),
-            onPressed: selectHandler,
+    return Container(
+      width: double.infinity,
+      child: RaisedButton(
+        color: Colors.green,
+        highlightColor: Colors.teal,
+        textColor: Colors.white,
+        shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(18.0),
         ),
-      ],
+        child: Text(answerText),
+        onPressed: selectHandler,
+      ),
     );
   }
 }
